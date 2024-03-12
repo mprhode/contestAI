@@ -33,16 +33,21 @@
 }
 
 function movePaddle(headPosUrl) {
+  console.log("making request...")
     $.ajax({          
             type: "GET",
             url: headPosUrl, 
-            cache: false, 
-            dataType: 'application:json',
+            // cache: false, 
+            // dataType: 'application:json',
             success: function(response) 
             {   
-              console.log("movePaddle", headPos);
+              console.log("movePaddle", response);
+              var headPos = response.headPos;
               assert((headPos >= 0) && (headPos <= 1)); 
               paddle1Y = headPos * PADDLE_HEIGHT;
+            },
+            error: function(jqxhr, status, exception) {
+              alert('Exception:' + exception);
             }
         });
   }
@@ -56,6 +61,8 @@ function movePaddle(headPosUrl) {
       moveEverything();
       drawEverything();
     }, 1000/framesPerSecond);
+    console.log(headPosUrl, "url");
+    setInterval(movePaddle, 1000, headPosUrl) //1000/framesPerSecond, headPosUrl)
 
     // canvas.addEventListener('mousemove',
     //   function(evt) {

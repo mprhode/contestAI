@@ -15,13 +15,13 @@
   <h1>Welcome to FaceFeed</h1>
   <h2>Our AI-enabled emotion detector will show you content that reflects your mood!</h2>
 </div>
-<div>
-  <img src="{{ url_for('video_feed') }}" />
-</div>
+
+{% include 'banner.html' %}
+
 
 
 
 <script src="{{ url_for('static', filename='js/jquery1.11.1.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/pong.js') }}"></script>
+
 </body>
 </html>

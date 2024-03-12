@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, Response, jsonify
 from camera import Camera
 from wtforms import Form, BooleanField, StringField, PasswordField, validators
 import time
+import json
 
 app = Flask(__name__)
 
@@ -43,7 +44,7 @@ def gen(camera):
         
 def genpong(camera):
     while True:
-        yield str({"headPos": camera.get_x_coord()}).encode("utf-8")
+        return json.dumps({"headPos": camera.get_x_coord()}).encode("utf-8")
 
 
 @app.route('/video_feed')
@@ -56,6 +57,7 @@ def video_feed():
 
 @app.route('/move_paddle', methods=['GET'])
 def move_paddle():
+    print(video_stream.get_x_coord())
     return Response(genpong(video_stream), mimetype="application/json")
 
 

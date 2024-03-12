@@ -1,0 +1,1 @@
+download a face detection model from media pipe and stick it in this folder https://developers.google.com/mediapipe/solutions/vision/face_detector#models

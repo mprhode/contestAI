@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="description" content="Data Dashboard">
+   <meta name="author" content="Aboze Brain">
+   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+   <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+   <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
+<title>Entertain Me</title>
+</head>
+<body class="container">
+<div>
+  <h1>Welcome to FaceFeed</h1>
+  <h2>Our AI-enabled emotion detector will show you content that reflects your mood!</h2>
+</div>
+<div>
+  <img src="{{ url_for('video_feed') }}" />
+</div>
+
+
+
+<script src="{{ url_for('static', filename='js/jquery1.11.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pong.js') }}"></script>
+</body>
+</html>

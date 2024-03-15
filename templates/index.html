@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <meta name="description" content="Data Dashboard">
-   <meta name="author" content="Aboze Brain">
-   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-   <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-   <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
-<title>Welcome</title>
-</head>
-<body class="container">
+{% extends 'base.html' %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+<h1></h1>
 <h1>Choose your own adventure...</h1>
-<div><p>Here are the T&Cs, opt out of data collection click here / TODO implement this<input type="checkbox"></p></div>
+<div class="alert alert-info"><p span="warning">No data will be collected by this application
+    </p></div>
 <div>
-    <a href="/loan"><button type="button" class="btn btn-primary btn-lg">Apply for a loan</button></a>
+    <a href="/newsfeed"><button type="button" class="btn btn-primary btn-lg">Newsfeed</button></a>
     <a href="/pong"><button type="button" class="btn btn-primary btn-lg">HeadPong</button></a>
     <!--<a href="/social"><button type="button" class="btn btn-primary btn-lg">XXX</button></a>-->
+    
 </div>
-        <script src="{{ url_for('static', filename='js/jquery1.11.1.min.js') }}"></script>
-</body>
-</html>
+{% endblock %}

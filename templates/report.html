@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}My Data{% endblock %}
+{% block content %}
+<div>
+  <h1>Report Externally</h1>
+</div>
+<div class="row">
+    <div class="col-sm">
+      <div class="card" style="width: 12rem;">
+        <img class="card-img-top" src="{{url_for('static', filename='data/aljlogo')}}" style="height: 12rem;"
+        alt="AJL logo">
+        <div class="card-body">
+          <h5 class="card-title">Algorithmic Justice League</h5>
+          <a href="www.ajl.org" class="btn btn-primary">Find out more</a>
+          <a href="ww.ajl.org" class="btn btn-secondary">Report</a>
+
+        </div>
+      </div>
+
+      <div class="col-sm">
+        <div class="card" style="width: 12rem;">
+          <img class="card-img-top" src="{{url_for('static', filename='data/InclusivAILogo.webp')}}" style="height: 12rem;"
+          alt="Inclusive AI Project logo">
+          <div class="card-body">
+            <h5 class="card-title">Inclusive AI Project</h5>
+            <a href="www.inclusiveaiproject.com" class="btn btn-primary">Find out more</a>
+            <a href="www.inclusiveaiproject.com" class="btn btn-secondary">Report</a>
+          </div>
+        </div>
+    </div>
+{% endblock %}

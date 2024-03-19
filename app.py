@@ -1,12 +1,17 @@
-from flask import Flask, render_template, request, Response, jsonify
-from camera import Camera
-from wtforms import Form, BooleanField, StringField, PasswordField, validators
 import time
 import json
+from urllib import parse
 
+from flask import Flask, render_template, request, Response, jsonify, redirect, url_for
+from wtforms import Form, BooleanField, StringField, PasswordField, validators
+
+from camera import Camera
+from newsfeed import Feed
+from pongutils import get_high_score, set_high_score
+from mydatautils import get_user_data, set_user_data, parse_response
 app = Flask(__name__)
 
-video_stream = Camera()
+# video_stream = Camera()
 
 class LoanForm(Form):
     amount = StringField('Amount (max. 1m)', [validators.NumberRange(min=0, max=1000000)])
@@ -23,17 +28,69 @@ class LoanForm(Form):
 def start():
     return render_template('index.html')
 
+@app.route("/newsfeed", methods=['GET', 'POST'])
+def newsfeed():
+    f = Feed()
+    feed = json.loads(f.get_feed(N=3))
+    print(feed)
+    return render_template('facefeed.html', data=feed)
 
-# @app.route('/loan', methods=['GET', 'POST'])
-# def loan():
-#     form = LoanForm(request.form)
-#     if request.method == 'POST' and form.validate():
-#         user = User(form.username.data, form.email.data,
-#                     form.password.data)
-#         db_session.add(user)
-#         flash('Thanks for registering')
-#         return redirect(url_for('login'))
-#     return render_template('loan.html', form=form)
+
+@app.route("/save_high_score", methods=["POST"])
+def save_high_score():
+    if request.method == 'POST':
+        if request.highScore:
+           highScore = int(request.highScore)
+           questions.append({'highScore': highScore})
+           set_high_score(highScore)
+
+        highScore = get_high_score()
+
+    return render_template('def.html', questions=questions)
+
+
+
+data = json.loads(json.dumps({"timestamp": "12th March 2023",
+                     "screenshot":  "img",
+                     "service":  "www.newsfeed.com", 
+                    "url": "djfjdfjdlkfs"})) # NB json.loads!!
+
+
+
+@app.route("/report_external")
+def report_external():
+    return render_template('report-external.html')
+
+@app.route("/explain")
+def explain():
+    pass
+
+@app.route("/compare")
+def compare():
+    pass
+
+@app.route("/user_data", methods=["GET", "POST"])
+def user_data():
+    if request.method == "POST":
+        data = request.get_data().decode("utf-8")
+    print(data)
+    data = parse.unquote(data)
+    data = parse_response(data)
+    print(222, data)
+    redir = data["redirect_url"].replace("/", "")
+    del data["redirect_url"]
+    return redirect(url_for(redir, data=data))
+
+
+@app.route("/report_internal")
+def report_internal():
+    data = request.get_data()
+    return render_template('report-internal.html', code=302, data=json.loads(json.dumps(data)))
+
+@app.route("/my_data")
+def my_data(data):
+    data = request.get_data()
+    return render_template('mydata.html', code=302, data=json.loads(json.dumps(data)))
 
 def gen(camera):
     while True:
@@ -61,10 +118,22 @@ def move_paddle():
     return Response(genpong(video_stream), mimetype="application/json")
 
 
-@app.route('/pong', methods=['GET', 'POST'])
-def face():
-    # TODO next: solve infinite loop problem...
-    return render_template('headpong.html')
+
+@app.route('/update_high_score', methods=['POST'])
+def updateHighScore():
+    print(request)
+    raise Exception()
+    if request.method == 'POST':
+        if request.highScore:
+           highScore = int(request.highScore)
+           set_high_score(highScore)
+
+
+@app.route('/pong/', methods=["GET", "POST"])
+def pong():
+    highScore = get_high_score()
+    data = {'highScore': highScore}
+    return render_template('headpong.html', data=data)
 
 
 if __name__ == '__main__':

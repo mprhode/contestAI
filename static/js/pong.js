@@ -2,6 +2,7 @@
   
   var canvas;
   var canvasContext;
+  var canvasHeight;
   var ballX = 50;
   var ballY = 50;
   var ballSpeedX = 10;
@@ -12,7 +13,6 @@
   const PADDLE_WIDTH = 10;
   const BUFFER = 10;
   var score = 0;
-  var highScore = 0;
   var running = false;
 
   // function calcMousePos(evt) {
@@ -33,7 +33,6 @@
 }
 
 function movePaddle(headPosUrl) {
-  console.log("making request...")
     $.ajax({          
             type: "GET",
             url: headPosUrl, 
@@ -41,10 +40,10 @@ function movePaddle(headPosUrl) {
             // dataType: 'application:json',
             success: function(response) 
             {   
-              console.log("movePaddle", response);
+              // console.log("movePaddle", response, canvasHeight);
               var headPos = response.headPos;
               assert((headPos >= 0) && (headPos <= 1)); 
-              paddle1Y = headPos * PADDLE_HEIGHT;
+              paddle1Y = headPos * canvasHeight;
             },
             error: function(jqxhr, status, exception) {
               alert('Exception:' + exception);
@@ -56,12 +55,14 @@ function movePaddle(headPosUrl) {
   window.onload = () => {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
+    canvasHeight = canvas.height;
     var framesPerSecond = 40;
     setInterval(function(){
       moveEverything();
       drawEverything();
     }, 1000/framesPerSecond);
     console.log(headPosUrl, "url");
+    console.log(updateHighScoreUrl, "url");
     setInterval(movePaddle, 1000, headPosUrl) //1000/framesPerSecond, headPosUrl)
 
     // canvas.addEventListener('mousemove',
@@ -118,6 +119,19 @@ function movePaddle(headPosUrl) {
         ballReset();
         if(score > highScore){
           highScore = score;
+          $.ajax({
+            type : 'POST',
+            url : updateHighScoreUrl,
+            // contentType: 'application/json;charset=UTF-8',
+            data : {'highscore': highScore},
+            success : function(data, status){
+              console.log("Data: " + highScore + "\nStatus: " + status);
+            },
+            error: function(data, status){
+              alert("Data: " + highScore + "\nStatus: " + status);
+            },
+          });
+          
         }
         score = 0;
         ballSpeedX = 10;

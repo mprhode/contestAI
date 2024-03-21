@@ -47,6 +47,8 @@ class Camera(BaseCamera):
         while True:
             # read current frame
             _, img = camera.read()
+            # flip image to get mirror
+            img = cv2.flip(img, 1)
 
             detective.detect(img, explain=explain)
             img = detective.get_image()

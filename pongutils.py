@@ -10,6 +10,6 @@ def get_high_score():
 def set_high_score(s):
     s = int(s)
     assert s > 0, f"high score: {s}"
-    with open(HIGHSCOREFILE) as f:
+    with open(HIGHSCOREFILE, "w") as f:
         f.write(str(s))
 

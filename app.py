@@ -11,7 +11,7 @@ from pongutils import get_high_score, set_high_score
 from mydatautils import get_user_data, set_user_data, parse_response
 app = Flask(__name__)
 
-# video_stream = Camera()
+video_stream = Camera()
 
 class LoanForm(Form):
     amount = StringField('Amount (max. 1m)', [validators.NumberRange(min=0, max=1000000)])
@@ -32,7 +32,7 @@ def start():
 def newsfeed():
     f = Feed()
     feed = json.loads(f.get_feed(N=3))
-    print(feed)
+    # print(feed)
     return render_template('facefeed.html', data=feed)
 
 
@@ -72,10 +72,8 @@ def compare():
 @app.route("/user_data", methods=["GET", "POST"])
 def user_data():
     if request.method == "POST":
-        data = request.get_data().decode("utf-8")
+        data = parse_response(request.get_data())
     print(data)
-    data = parse.unquote(data)
-    data = parse_response(data)
     print(222, data)
     redir = data["redirect_url"].replace("/", "")
     del data["redirect_url"]
@@ -114,7 +112,7 @@ def video_feed():
 
 @app.route('/move_paddle', methods=['GET'])
 def move_paddle():
-    print(video_stream.get_x_coord())
+    # print(video_stream.get_x_coord())
     return Response(genpong(video_stream), mimetype="application/json")
 
 
@@ -122,11 +120,13 @@ def move_paddle():
 @app.route('/update_high_score', methods=['POST'])
 def updateHighScore():
     print(request)
-    raise Exception()
     if request.method == 'POST':
-        if request.highScore:
-           highScore = int(request.highScore)
-           set_high_score(highScore)
+        data = parse_response(request.get_data())
+        print(data)
+        highScore = int(data["highscore"])
+        set_high_score(highScore)
+        return {"message": "success"}, 200
+    return {"message": "error"}, 303
 
 
 @app.route('/pong/', methods=["GET", "POST"])

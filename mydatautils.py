@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import json
+from urllib import parse
 
 DATAFILE = Path("static/data/mydata.json")
 
@@ -13,7 +14,7 @@ def set_user_data(s):
         json.dumps(f)
 
 def parse_response(s):
-    print(s)
+    s = parse.unquote(s.decode("utf-8"))
     ret = s.split("&")
     ret = dict([item.split("=") for item in ret])
     return ret

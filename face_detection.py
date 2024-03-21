@@ -8,6 +8,7 @@ import numpy as np
 import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
+from glasses_detector import detector as eyeglass_detector
 
 MARGIN = 10  # pixels
 ROW_SIZE = 10  # pixels
@@ -64,6 +65,7 @@ class FaceDetector():
             bbox = detection.bounding_box
             start_point = bbox.origin_x, bbox.origin_y
             end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
+
             cv2.rectangle(annotated_image, start_point, end_point, TEXT_COLOR, 3)
 
             # Draw Loc of head
@@ -91,20 +93,22 @@ class FaceDetector():
         height, width, _ = img.shape
         return x / width
 
-    def detect(self, img, explain=False):
+    def detect(self, img, explain=True):
         # Detect faces in the input image.
         mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=img) # MR edit
 
         detection_result = self.detector.detect(mp_image)
 
         self.main_face_detection = None
+        self.main_face_size = None
         # Process the detection result. Find the biggest box
         for detection in detection_result.detections:
             # Get biggest box
             bbox = detection.bounding_box
             size = bbox.width * bbox.height
-            if (self.main_face_detection is None) or (size > self.main_face_detection):
+            if (self.main_face_detection is None) or (size > self.main_face_size):
                 self.main_face_detection = detection
+                self.main_face_size = size
 
         if self.main_face_detection:        
             # main face only
@@ -124,3 +128,11 @@ class FaceDetector():
         return self.main_face_x_coord
 
 
+def detect_glasses():
+    det = eyeglass_detector.GlassesDetector(kind="worn")
+    print(det.process_file("glasses-detector/data/0.jpg"))
+
+
+
+if __name__ == "__main__":
+    detect_glasses()

@@ -90,7 +90,7 @@ function movePaddle(headPosUrl) {
     colorRect(paddle1X, canvas.height - (BUFFER + PADDLE_HEIGHT), PADDLE_WIDTH, PADDLE_HEIGHT, 'red');
     // top paddle = computer, tracks the ball
     colorRect(ballX - (PADDLE_WIDTH/2), BUFFER, PADDLE_WIDTH, PADDLE_HEIGHT, 'blue');
-    //  drawScore();
+    drawScore();
     drawNet();
   }
 
@@ -152,11 +152,11 @@ function movePaddle(headPosUrl) {
     canvasContext.lineWidth=1;
     canvasContext.fillStyle='white';
     // canvasContext.lineStxle="#ffff00";
-    canvasContext.font="20py sans-serif";
+    canvasContext.font="30py sans-serif";
     var scoretext = "Current Score: " + score.toString();
-    canvasContext.fillText(scoretext, canvas.width - 750, 40);
+    canvasContext.fillText(scoretext, canvas.width - 750, 60);
     var highscoretext = "High Score: " + highScore.toString();
-    canvasContext.fillText(highscoretext, canvas.width - 200, 40);
+    canvasContext.fillText(highscoretext, canvas.width - 750, 40);
   }
 
   function colorRect(leftX, topY, width, height, drawColor){
@@ -169,5 +169,4 @@ function movePaddle(headPosUrl) {
     canvasContext.beginPath();
     canvasContext.arc(centerX, centerY, radius, 0, Math.PI*2, true);
     canvasContext.fill();
-  
   }

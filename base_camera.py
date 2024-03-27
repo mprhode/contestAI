@@ -82,7 +82,7 @@ class BaseCamera(object):
         return BaseCamera.frame
 
     @staticmethod
-    def frames():
+    def frames(explain=False):
         """"Generator that returns frames from the camera."""
         raise RuntimeError('Must be implemented by subclasses.')
 

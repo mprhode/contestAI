@@ -16,9 +16,9 @@
                 <label class="custom-control-label" for="explainSwitch">Explain</label>
             </div> -->
             <a class="nav-item nav-link" href="{{ url_for('explain') }}">Explain</a>
-            <a class="nav-item nav-link" onclick=reportInternal()>Report to Provider</a>
-            <a class="nav-item nav-link" href="{{ url_for('compare') }}">Compare service</a>
-            <a class="nav-item nav-link" href=downloadData()>Extract my data</a>
+            <a class="nav-item nav-link" href="{{ url_for('report_internal') }}">Report to Provider</a>
+            <!-- <a class="nav-item nav-link" href="{{ url_for('compare') }}">Compare service</a> -->
+            <a class="nav-item nav-link" href="{{ url_for('my_data') }}">Extract my data</a>
             <a class="nav-item nav-link" href="{{ url_for('report_external') }}">Report externally</a>
         </div>
     </div>

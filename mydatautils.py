@@ -14,7 +14,8 @@ def set_user_data(s):
         json.dumps(f)
 
 def parse_response(s):
-    s = parse.unquote(s.decode("utf-8"))
+    s = s.decode("utf-8")
+    s = parse.unquote(s)
     ret = s.split("&")
     ret = dict([item.split("=") for item in ret])
     return ret

@@ -25,7 +25,8 @@ function generate() {
 }
 
 // get user data 
-function getdatanow(redirectUrl) {
+function send_data(redirectUrl) {
+	console.log("send_data called")
 	post_data = {
         "timestamp": Date.now(),
         // "screenshot": takeScreenshot(),
@@ -35,19 +36,51 @@ function getdatanow(redirectUrl) {
     }
 	console.log(post_data)
     // send current data to url
-    $.post(userDataUrl,
-		post_data,
-    function(post_data, status){
-        console.log("getdatanow status: " + status);
-    });
+    // $.post(userDataUrl,
+	// 	post_data,
+	// 	function(post_data, status){
+	// 		console.log("getdatanow status: " + status);
+	// 	}
+	// );
+	// $.ajax({
+	// 	url: userDataUrl,
+	// 	type: "get", //send it through get method
+	// 	data: post_data,
+	// 	// success: function(response) {
+	// 	// 	console.log("success send_data")
+	// 	// },
+	// 	error: function(xhr) {
+	// 		console.log("error send_data")
+	// 	}
+		
+	// })
+
+	// var util = {};
+	// util.post = function(url, fields) {
+	// 	var $form = $('<form>', {
+	// 		action: userDataUrl,
+	// 		method: 'post'
+	// 	});
+	// 	$.each(post_data, function(key, val) {
+	// 		$('<input>').attr({
+	// 			type: "hidden",
+	// 			name: key,
+	// 			value: val
+	// 		}).appendTo($form);
+	// 	});
+	// 	console.log("submit")
+	// 	$form.appendTo('body').submit();
+	// }
+	/// none of these redirect b/c ajax...
+
 };
 
 function reportInternal() {
 	console.log("test internal report", reportInternalUrl)
-	getdatanow(reportInternalUrl);
+	send_data(reportInternalUrl);
 }
 
 function downloadData() {
 	console.log("test getmydata", downloadDataUrl)
-	getdatanow(downloadDataUrl);
+	send_data(downloadDataUrl);
 }

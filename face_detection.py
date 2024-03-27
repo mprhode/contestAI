@@ -8,7 +8,6 @@ import numpy as np
 import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-from glasses_detector import detector as eyeglass_detector
 
 MARGIN = 10  # pixels
 ROW_SIZE = 10  # pixels
@@ -57,37 +56,47 @@ class FaceDetector():
             Image with bounding boxes.
         """
         annotated_image = image.copy()
-        height, width, _ = image.shape
+        # height, width, _ = image.shape
 
-        # TODO only take biggest box size as detection...
-        for detection in detection_result.detections:
-            # Draw bounding_box
-            bbox = detection.bounding_box
-            start_point = bbox.origin_x, bbox.origin_y
-            end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
+        if not(self.main_face_detection is None):
+            bb = self.main_face_detection.bounding_box
+            x, y, w, h = bb.origin_x, bb.origin_y, bb.width, bb.height
+            # face = img[bb.origin_x:bb.origin_x+bb.width, bb.origin_y:bb.origin_y+bb.height]
+            ## detect top debug
+            # cv2.imwrite("tshirt.jpg", tshirt)
+            cv2.rectangle(annotated_image, (x,y), (x+w,y+h), TEXT_COLOR, 3)
 
-            cv2.rectangle(annotated_image, start_point, end_point, TEXT_COLOR, 3)
+
+
+        # # TODO only take biggest box size as detection...
+        # for detection in detection_result.detections:
+        #     # Draw bounding_box
+        #     bbox = detection.bounding_box
+        #     start_point = bbox.origin_x, bbox.origin_y
+        #     end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
+
+        #     cv2.rectangle(annotated_image, start_point, end_point, TEXT_COLOR, 3)
 
             # Draw Loc of head
             # keypoint_px = self._normalized_to_pixel_coordinates(self.main_face_x_coord, 
             #                                                     self.main_face_detection.bounding_box.origin_y,
             #                                                     width, height)
-            color, thickness, radius = (0, 255, 0), 2, 2
-            circle_xy = (self.main_face_x_coord, self.main_face_detection.bounding_box.origin_y)
-            cv2.circle(annotated_image, circle_xy, thickness, color, radius)
+            # color, thickness, radius = (0, 255, 0), 2, 2
+            # circle_xy = (bbox.origin_x, bbox.origin_y)
+            # cv2.circle(annotated_image, circle_xy, thickness, color, radius)
 
             # Draw label and score
-            category = detection.categories[0]
-            category_name = category.category_name
-            category_name = '' if category_name is None else category_name
-            probability = round(category.score, 2)
-            result_text = category_name + ' (' + str(probability) + ')'
-            text_location = (MARGIN + bbox.origin_x,
-                            MARGIN + ROW_SIZE + bbox.origin_y)
-            cv2.putText(annotated_image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
-                        FONT_SIZE, TEXT_COLOR, FONT_THICKNESS)
+            # category = detection.categories[0]
+            # category_name = category.category_name
+            # category_name = '' if category_name is None else category_name
+            # probability = round(category.score, 2)
+            # result_text = category_name + ' (' + str(probability) + ')'
+            # text_location = (MARGIN + bbox.origin_x,
+            #                 MARGIN + ROW_SIZE + bbox.origin_y)
+            # cv2.putText(annotated_image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
+            #             FONT_SIZE, TEXT_COLOR, FONT_THICKNESS)
 
-        return cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
+        return annotated_image #cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
     
     def __get_relative_x(self, img, x):
         height, width, _ = img.shape
@@ -105,33 +114,74 @@ class FaceDetector():
         for detection in detection_result.detections:
             # Get biggest box
             bbox = detection.bounding_box
+
             size = bbox.width * bbox.height
             if (self.main_face_detection is None) or (size > self.main_face_size):
-                self.main_face_detection = detection
-                self.main_face_size = size
+                has_green = self.detect_color(img, detection)
+                if has_green: 
+                    # print("g")
+                    self.main_face_x_coord = None
+                else:
+                    self.main_face_detection = detection
+                    self.main_face_size = size
 
         if self.main_face_detection:        
             # main face only
             main_face_bbox = self.main_face_detection.bounding_box
             self.main_face_x_coord = self.__get_relative_x(img, main_face_bbox.origin_x + main_face_bbox.width/2)
-        
+        self.current_image = img
+
+        # EXPLANATION 
         if explain:
-            image_copy = np.copy(mp_image.numpy_view())
-            self.current_image = self.visualize(image_copy, detection_result)
-        else:
-            self.current_image = img
+            self.current_image = self.visualize(img, detection_result)
 
     def get_image(self):
         return self.current_image
     
     def get_x_coord(self):
         return self.main_face_x_coord
+    
+    def detect_color(self, img, detection):
+        has_green = False
+
+        bb = detection.bounding_box
+        x, y, w, h = bb.origin_x, bb.origin_y, bb.width, bb.height
+        # face = img[bb.origin_x:bb.origin_x+bb.width, bb.origin_y:bb.origin_y+bb.height]
+        x1, y1, x2, y2 = x-int(0.5*w), y+h, x+int(w*1.5), y+2*h
+        tshirt = img[y1:y2, x1:x2]
+        ## detect top debug
+        # cv2.imwrite("tshirt.jpg", tshirt)
+        # cv2.rectangle(img, (x1,y1), (x2,y2), TEXT_COLOR, 3)
+        ## detect green
+        ## Convert to HSV
+        try:
+            hsv = cv2.cvtColor(tshirt, cv2.COLOR_BGR2HSV)
+
+            ## Mask of green (36,25,25) ~ (86, 255,255)
+            # mask = cv2.inRange(hsv, (36, 25, 25), (86, 255,255))
+            mask = cv2.inRange(hsv, (36, 25, 25), (70, 255,255))
+
+            ## Slice the green
+            imask = mask>0
+            has_green = imask.sum() > 5
+            # ## debug_green
+            # green = np.zeros_like(tshirt, np.uint8)
+            # green[imask] = tshirt[imask]
+
+            # ## Save 
+            # cv2.imwrite("green.png", green)
+        except cv2.error:
+            pass #TODO error fix needed 
+        return has_green
+
 
 
 def detect_glasses():
     det = eyeglass_detector.GlassesDetector(kind="worn")
     print(det.process_file("glasses-detector/data/0.jpg"))
 
+
+    
 
 
 if __name__ == "__main__":

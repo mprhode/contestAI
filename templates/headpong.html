@@ -1,18 +1,42 @@
 {% extends 'userbase.html' %}
+{% block extraheaders %}
+<style>
+  body {
+    background: #333;
+  }
+</style>
+{% endblock %}
 {% block title %}HeadPong{% endblock %}
 {% block content %}
-<div>
-  <h1>Headpong</h1>
+<div style="text-align:center; color: yellow">
+  <!-- <h1 style="font-family: Workbench">Headpong</h1> -->
+<p style="white-space: pre-line">
+<pre style="color: yellow">
+   _    _                _                         
+  | |  | |              | |                        
+  | |__| | ___  __ _  __| |_ __   ___  _ __   __ _ 
+  |  __  |/ _ \/ _` |/ _` | '_ \ / _ \| '_ \ / _` |
+  | |  | |  __/ (_| | (_| | |_) | (_) | | | | (_| |
+  |_|  |_|\___|\__,_|\__,_| .__/ \___/|_| |_|\__, |
+                          | |                 __/ |
+                          |_|                |___/  
+</pre>
+</p>
   <h2>Use your head + AI to beat the high-score</h2>
 </div>
-<div>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
+<div style="text-align: center; width: 800;" class="mx-auto">
+  <canvas class="mx-auto" id="gameCanvas" width="800" height="600"></canvas>
+</div>
+<div style="text-align: center; width: 800;" class="mx-auto">
+  <img class="mx-auto" src="{{ url_for('video_feed') }}" width="800"/>
 </div>
 <div>
-  <img src="{{ url_for('video_feed') }}" width="800"/>
+  <div style="height: 50px"></div>
+, <a href="/">
+  <button type="button" class="btn btn-secondary btn-lg">Restart</button>
+  </a>
+  <div style="height: 300px"></div>
 </div>
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="highScoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -29,6 +53,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 {% endblock %}
 

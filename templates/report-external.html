@@ -6,8 +6,8 @@
 </div>
 <div class="row">
     <div class="col-sm">
-      <div class="card" style="width: 12rem;">
-        <img class="card-img-top" src="{{url_for('static', filename='data/aljlogo')}}" style="height: 12rem;"
+      <div class="card report-external-card bg-dark text-white">
+        <img class="card-img-top report-external-image" src="{{url_for('static', filename='data/aljlogo')}}"
         alt="AJL logo">
         <div class="card-body">
           <h5 class="card-title">Algorithmic Justice League</h5>
@@ -16,10 +16,11 @@
 
         </div>
       </div>
+    </div>
 
-      <div class="col-sm">
-        <div class="card" style="width: 12rem;">
-          <img class="card-img-top" src="{{url_for('static', filename='data/InclusivAILogo.webp')}}" style="height: 12rem;"
+    <div class="col-sm">
+        <div class="card report-external-card bg-dark text-white">
+          <img class="card-img-top report-external-image" src="{{url_for('static', filename='data/InclusivAILogo.webp')}}" 
           alt="Inclusive AI Project logo">
           <div class="card-body">
             <h5 class="card-title">Inclusive AI Project</h5>
@@ -30,8 +31,8 @@
     </div>
 
     <div class="col-sm">
-      <div class="card" style="width: 12rem;">
-        <img class="card-img-top" src="{{url_for('static', filename='data/AIDD_logo.png')}}" style="height: 12rem;"
+      <div class="card report-external-card bg-dark text-white">
+        <img class="card-img-top report-external-image" src="{{url_for('static', filename='data/AIID_logo.png')}}" style="background: 'black'"
         alt="Ai Incident Database logo">
         <div class="card-body">
           <h5 class="card-title">AI Incident Database</h5>
@@ -40,7 +41,8 @@
         </div>
       </div>
   </div>
+</div>
 
+{% include 'restart.html' %}
 
-    
 {% endblock %}

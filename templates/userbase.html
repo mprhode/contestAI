@@ -1,7 +1,12 @@
 {% extends "base.html" %}
+{% block extraheaders %}{% endblock %}
 {% block title %}{% endblock %}
 {% block content %}
 {% endblock %}
+
+<a href="/">
+    <button type="button" class="btn btn-secondary btn-lg">Restart</button>
+</a>
 
 {% block footer %}
 {% include 'contestai.html' %}

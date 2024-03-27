@@ -28,6 +28,7 @@ detective = FaceDetector()
 
 class Camera(BaseCamera):
     video_source = 0
+    explain = False
 
     def __init__(self):
         if os.environ.get('OPENCV_CAMERA_SOURCE'):
@@ -35,11 +36,19 @@ class Camera(BaseCamera):
         super(Camera, self).__init__()
 
     @staticmethod
+    def explain_on():
+        Camera.explain = True
+
+    @staticmethod
+    def explain_off():
+        Camera.explain = False
+
+    @staticmethod
     def set_video_source(source):
         Camera.video_source = source
 
     @staticmethod
-    def frames(explain=False):
+    def frames():
         camera = cv2.VideoCapture(Camera.video_source)
         if not camera.isOpened():
             raise RuntimeError('Could not start camera.')
@@ -50,8 +59,9 @@ class Camera(BaseCamera):
             # flip image to get mirror
             img = cv2.flip(img, 1)
 
-            detective.detect(img, explain=explain)
+            detective.detect(img, explain=Camera.explain)
             img = detective.get_image()
+            # print(img, Camera.explain)
 
             # encode as a jpeg image and return it
             yield cv2.imencode('.jpg', img)[1].tobytes()

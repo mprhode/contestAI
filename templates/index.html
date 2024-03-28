@@ -7,11 +7,15 @@
 
 <div style="font-size: 160px;">
     <!--<a href="/newsfeed"><button type="button" class="btn btn-primary btn-lg">Newsfeed</button></a>-->
-    <a href="/pong" style="margin: auto;"><button style="font-size: 60px;" type="button" class="btn btn-primary btn-lg">Play HeadPong</button></a>
+    <a href="/pong" style="margin: auto;"><button style="font-size: 60px;" type="button" class="btn btn-primary btn-lg">Play</button></a>
     <!--<a href="/social"><button type="button" class="btn btn-primary btn-lg">XXX</button></a>-->
     
 </div>
 <div class="alert alert-info">
     <p span="warning">This exhibit does not collect any personal data including images</p>
+</div>
+<div class="alert alert-info">
+    <h3>Sign up to get involved in ContestAI research or keep informed</h3>
+    <img src="{{url_for('static', filename='data/adobe-express-qr-code.png')}}">
 </div>
 {% endblock %}

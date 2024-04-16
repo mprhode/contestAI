@@ -109,6 +109,7 @@ class FaceDetector():
 
         self.main_face_detection = None
         self.main_face_size = None
+        anyone_green = False
         # Process the detection result. Find the biggest box
         for detection in detection_result.detections:
             # Get biggest box
@@ -116,10 +117,10 @@ class FaceDetector():
 
             size = bbox.width * bbox.height
             if (self.main_face_detection is None) or (size > self.main_face_size):
-                has_green = self.detect_color(img, detection)
-                if has_green: 
-                    # print("g")
-                    self.main_face_x_coord = None
+                someone_in_green = self.detect_color(img, detection)
+                if someone_in_green: 
+                    anyone_green = True
+                    # self.main_face_x_coord = None
                 else:
                     self.main_face_detection = detection
                     self.main_face_size = size
@@ -134,6 +135,8 @@ class FaceDetector():
         if explain:
             self.current_image = self.visualize(img, detection_result)
 
+        return anyone_green
+
     def get_image(self):
         return self.current_image
     
@@ -146,7 +149,8 @@ class FaceDetector():
         bb = detection.bounding_box
         x, y, w, h = bb.origin_x, bb.origin_y, bb.width, bb.height
         # face = img[bb.origin_x:bb.origin_x+bb.width, bb.origin_y:bb.origin_y+bb.height]
-        x1, y1, x2, y2 = x-int(0.5*w), y+h, x+int(w*1.5), y+2*h
+        neck_offset = int(h*0.1)
+        x1, y1, x2, y2 = x-int(0.5*w), y+h+neck_offset, x+int(w*1.5), y+2*h+neck_offset
         tshirt = img[y1:y2, x1:x2]
         ## detect top debug
         # cv2.imwrite("tshirt.jpg", tshirt)
@@ -158,30 +162,25 @@ class FaceDetector():
 
             ## Mask of green (36,25,25) ~ (86, 255,255)
             # mask = cv2.inRange(hsv, (36, 25, 25), (86, 255,255))
-            mask = cv2.inRange(hsv, (36, 25, 25), (70, 255,255))
+            mask = cv2.inRange(hsv, (36, 25, 25), (90, 255,255))
 
             ## Slice the green
             imask = mask>0
-            has_green = imask.sum() > 5
+            has_green = imask.sum() / imask.size > 0.25 # more than one quarter is green
             # ## debug_green
-            # green = np.zeros_like(tshirt, np.uint8)
-            # green[imask] = tshirt[imask]
+            if has_green:
+                print(imask.sum() / imask.size > 0.25)
+                green = np.zeros_like(tshirt, np.uint8)
+                green[imask] = tshirt[imask]
 
-            # ## Save 
-            # cv2.imwrite("green.png", green)
+                ## Save 
+                cv2.imwrite("green.png", green)
         except cv2.error:
             pass #TODO error fix needed 
         return has_green
-
-
-
-def detect_glasses():
-    det = eyeglass_detector.GlassesDetector(kind="worn")
-    print(det.process_file("glasses-detector/data/0.jpg"))
-
 
     
 
 
 if __name__ == "__main__":
-    detect_glasses()
+    pass

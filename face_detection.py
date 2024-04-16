@@ -20,7 +20,6 @@ def is_valid_normalized_value(value: float) -> bool:
             return (value > 0 or math.isclose(0, value)) and (value < 1 or
                                                             math.isclose(1, value))
 
-
 class FaceDetector():
     def __init__(self):
         base_options = python.BaseOptions(model_asset_path='blaze_face_short_range.tflite') # set model name here

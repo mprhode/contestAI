@@ -161,11 +161,11 @@ class FaceDetector():
 
             ## Mask of green (36,25,25) ~ (86, 255,255)
             # mask = cv2.inRange(hsv, (36, 25, 25), (86, 255,255))
-            mask = cv2.inRange(hsv, (36, 25, 25), (90, 255,255))
+            mask = cv2.inRange(hsv, (38, 25, 25), (86, 255,255))
 
             ## Slice the green
             imask = mask>0
-            has_green = imask.sum() / imask.size > 0.1 # more than one quarter is green
+            has_green = imask.sum() / imask.size > 0.2 # more than one quarter is green
             # ## debug_green
             # if has_green:
             #     print(imask.sum() / imask.size > 0.25)

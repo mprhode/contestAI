@@ -3,7 +3,6 @@ import json
 from urllib import parse
 
 from flask import Flask, render_template, request, Response, jsonify, redirect, url_for
-from wtforms import Form, BooleanField, StringField, PasswordField, validators
 
 from camera import Camera
 from newsfeed import Feed

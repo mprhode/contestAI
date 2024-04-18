@@ -21,9 +21,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 python3 app.py
 ```
+visit localhost:5000 in browser
 
 #### Notes
 - Headpong requires flask to be run using python3 app.py instead of `flask run` due to specific env variables that have to be set, otherwise webcam access doesn't work
-
+- Camera will time out after 100 (~16 minutes) of inactivity - just restart the app `python3 app.py` and reload the browser, alternatively change the timeout in base_camera.py line 101
 
 

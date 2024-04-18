@@ -12,16 +12,6 @@ app = Flask(__name__)
 
 video_stream = Camera()
 
-class LoanForm(Form):
-    amount = StringField('Amount (max. 1m)', [validators.NumberRange(min=0, max=1000000)])
-    country = StringField('Which country were you born in?', [validators.Length(min=6, max=35)])
-    password = PasswordField('New Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I accept the TOS', [validators.DataRequired()])
-
 
 @app.route("/")
 def start():

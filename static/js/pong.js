@@ -15,6 +15,7 @@
   const BALL_RADIUS = 5;
   var score = 0;
   var running = false;
+  var updateHighScoreUrl;
 
   // function calcMousePos(evt) {
   //   var rect = canvas.getBoundingClientRect();
@@ -74,6 +75,25 @@ function movePaddle(headPosUrl) {
      // 25=1000/40=40FPS
 
   }
+function updateHighScore(highScore) {
+  $.ajax({
+    type : 'POST',
+    url : updateHighScoreUrl,
+    // contentType: 'application/json;charset=UTF-8',
+    data : {'highscore': highScore},
+    success : function(data, status){
+      console.log("Data: " + highScore + "\nStatus: " + status);
+    },
+    error: function(data, status){
+      alert("Data: " + highScore + "\nStatus: " + status);
+    },
+  });
+}
+
+function resetHighScore() {
+  updateHighScore(0);
+  location.reload()
+}
 
   function drawNet(){
     for(var i = 0; i < canvas.width; i+=15){
@@ -121,18 +141,7 @@ function movePaddle(headPosUrl) {
         ballReset();
         if(score > highScore){
           highScore = score;
-          $.ajax({
-            type : 'POST',
-            url : updateHighScoreUrl,
-            // contentType: 'application/json;charset=UTF-8',
-            data : {'highscore': highScore},
-            success : function(data, status){
-              console.log("Data: " + highScore + "\nStatus: " + status);
-            },
-            error: function(data, status){
-              alert("Data: " + highScore + "\nStatus: " + status);
-            },
-          });
+          updateHighScore(highScore);
         }
         score = 0;
         ballSpeedY = 10;

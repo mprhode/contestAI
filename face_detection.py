@@ -149,8 +149,7 @@ class FaceDetector():
         bb = detection.bounding_box
         x, y, w, h = bb.origin_x, bb.origin_y, bb.width, bb.height
         # face = img[bb.origin_x:bb.origin_x+bb.width, bb.origin_y:bb.origin_y+bb.height]
-        neck_offset = int(h*0.1)
-        x1, y1, x2, y2 = x-int(0.5*w), y+h+neck_offset, x+int(w*1.5), y+2*h+neck_offset
+        x1, y1, x2, y2 = x-int(0.5*w), y+h, x+int(w*1.5), y+2*h
         tshirt = img[y1:y2, x1:x2]
         ## detect top debug
         # cv2.imwrite("tshirt.jpg", tshirt)
@@ -166,15 +165,15 @@ class FaceDetector():
 
             ## Slice the green
             imask = mask>0
-            has_green = imask.sum() / imask.size > 0.25 # more than one quarter is green
+            has_green = imask.sum() / imask.size > 0.1 # more than one quarter is green
             # ## debug_green
-            if has_green:
-                print(imask.sum() / imask.size > 0.25)
-                green = np.zeros_like(tshirt, np.uint8)
-                green[imask] = tshirt[imask]
+            # if has_green:
+            #     print(imask.sum() / imask.size > 0.25)
+            #     green = np.zeros_like(tshirt, np.uint8)
+            #     green[imask] = tshirt[imask]
 
-                ## Save 
-                cv2.imwrite("green.png", green)
+            #     ## Save 
+            #     cv2.imwrite("green.png", green)
         except cv2.error:
             pass #TODO error fix needed 
         return has_green

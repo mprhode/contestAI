@@ -1,0 +1,42 @@
+
+.glyphicon {
+    opacity: 1;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+  }
+  
+  .glyphicon:hover {
+    opacity: 0.75;
+    cursor: pointer;
+  }
+
+img.report-external-image {
+  width: auto;
+  height: 10em;
+  margin: auto;
+}
+
+#contestai-button {
+  float:right;
+}
+
+
+.outline {
+    border: 1px solid black;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+}
+
+.outline h1, .outline h4 {
+  text-align: center;
+}
+.outline-info {
+  border-color: #17a2b8;
+  color: #17a2b8
+
+}
+
+.dropdown>button:focus~.dropdown-menu {
+  display: block;
+}

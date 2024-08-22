@@ -13,7 +13,7 @@ To use - download the repository, unzip the folder, in the folder double-click i
 
 #### Screenshots
 
-![Screenshot from 2024-08-22 15-05-49](https://github.com/user-attachments/assets/91242778-14fc-40d8-a696-4da9ef8d72cc)
-![Screenshot from 2024-08-22 15-42-19](https://github.com/user-attachments/assets/79b3b2b5-4d11-41e0-b708-576a2ae91633)
-![Screenshot from 2024-08-22 15-42-38](https://github.com/user-attachments/assets/1809e03c-1d58-4372-a3e1-9519e43afb75)
-![Screenshot from 2024-08-22 15-42-56](https://github.com/user-attachments/assets/ce64e9e2-8b2e-4e3b-a67d-487edd37389c)
+<img src="https://github.com/user-attachments/assets/ce64e9e2-8b2e-4e3b-a67d-487edd37389c" width="200">
+<img src="https://github.com/user-attachments/assets/1809e03c-1d58-4372-a3e1-9519e43afb75" width="200">
+<img src="https://github.com/user-attachments/assets/79b3b2b5-4d11-41e0-b708-576a2ae91633" width="200">
+<img src="https://github.com/user-attachments/assets/91242778-14fc-40d8-a696-4da9ef8d72cc" width="200">

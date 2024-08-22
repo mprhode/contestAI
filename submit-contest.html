@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Data Dashboard">
+        <meta name="author" content="Aboze Brain">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href='styles/bootstrap.min.css'>
+        <link rel="stylesheet" href='styles/styles.css'>
+        <title>ContestAI</title>
+    
+</head>
+<body class="container" style="margin-top: 2em;">
+    
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm alert alert-danger">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heartbreak" viewBox="0 0 16 16">
+                            <path d="M8.867 14.41c13.308-9.322 4.79-16.563.064-13.824L7 3l1.5 4-2 3L8 15a38 38 0 0 0 .867-.59m-.303-1.01-.971-3.237 1.74-2.608a1 1 0 0 0 .103-.906l-1.3-3.468 1.45-1.813c1.861-.948 4.446.002 5.197 2.11.691 1.94-.055 5.521-6.219 9.922m-1.25 1.137a36 36 0 0 1-1.522-1.116C-5.077 4.97 1.842-1.472 6.454.293c.314.12.618.279.904.477L5.5 3 7 7l-1.5 3zm-2.3-3.06-.442-1.106a1 1 0 0 1 .034-.818l1.305-2.61L4.564 3.35a1 1 0 0 1 .168-.991l1.032-1.24c-1.688-.449-3.7.398-4.456 2.128-.711 1.627-.413 4.55 3.706 8.229Z"></path>
+                            </svg>
+                        ContestAI
+                    </h1>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="contest.html"><button type="button" class="btn btn-outline-danger">Contesting Process</button></a>
+                        <a href="submit-contest.html"></a><button type="button" class="btn btn-danger">Submit a contest</button></a>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+              <div class="col-9 outline outline-danger">
+                <h2>Submit Contest</h2>
+                <div class="card-container row row-cols-1 m-1">
+                    <div class="card">
+                        <div class="card-body">
+                        <button type="button" class="remove-btn btn btn-sm btn-outline-danger" aria-label="Remove">
+                            <!-- x -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </button>
+                        <h5 class="card-title">Email <input class="card-text" placeholder="email[optional]"></h5>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                        <button type="button" class="remove-btn btn btn-sm btn-outline-danger" aria-label="Remove">
+                            <!-- x -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </button>
+                        <h5 class="card-title">What happened? <input class="card-text" placeholder="What happened?"></h5>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                        <button type="button" class="remove-btn btn btn-sm btn-outline-danger" aria-label="Remove">
+                            <!-- x -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </button>
+                        <h5 class="card-title">Auto-Explain <img src="data/download.png"></h5>
+                        <button class="btn btn-sm btn-success">Satisfied</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                        <button type="button" class="remove-btn btn btn-sm btn-outline-danger" aria-label="Remove">
+                            <!-- x -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </button>
+                        <h5 class="card-title">Bias Bounties</h5>
+                        <div class="card-text">
+                            <p><input type="checkbox">  Discrimination</p>
+                            <p><input type="checkbox">  False information</p>
+                            <p><input type="checkbox">  Bad performance</p>
+                            <p><input type="checkbox">  Privacy violation</p>
+
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                        <button type="button" class="remove-btn btn btn-sm btn-outline-danger" aria-label="Remove">
+                            <!-- x -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </button>
+                        <h5 class="card-title">Share with....
+
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Our Company
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" href="#">The AI Ombudsman</a>
+                                  <a class="dropdown-item" href="#">A Public Register</a>
+                                  <a class="dropdown-item" href="#">Journalists and media</a>
+                                  <a class="dropdown-item" href="#">A regulator e.g. The Information Commissioners Office</a>
+                                </div>
+                              </div>
+                        </h5>
+                    </div>
+
+
+                
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-warning">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"></path>
+                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"></path>
+                </svg>
+                                Download My Data
+                              </button>
+
+                            <button type="button" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383"/>
+                                    <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708z"/>
+                                  </svg>
+                                Log to contestability register
+                              </button>
+
+                              <a href="submitted.html"><button type="button" class="btn btn-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heartbreak" viewBox="0 0 16 16">
+                                    <path d="M8.867 14.41c13.308-9.322 4.79-16.563.064-13.824L7 3l1.5 4-2 3L8 15a38 38 0 0 0 .867-.59m-.303-1.01-.971-3.237 1.74-2.608a1 1 0 0 0 .103-.906l-1.3-3.468 1.45-1.813c1.861-.948 4.446.002 5.197 2.11.691 1.94-.055 5.521-6.219 9.922m-1.25 1.137a36 36 0 0 1-1.522-1.116C-5.077 4.97 1.842-1.472 6.454.293c.314.12.618.279.904.477L5.5 3 7 7l-1.5 3zm-2.3-3.06-.442-1.106a1 1 0 0 1 .034-.818l1.305-2.61L4.564 3.35a1 1 0 0 1 .168-.991l1.032-1.24c-1.688-.449-3.7.398-4.456 2.128-.711 1.627-.413 4.55 3.706 8.229Z"></path>
+                                    </svg>
+                                Submit
+                              </button>
+                                </a>
+                        </div>
+                    </div>
+
+
+                    </div>
+                  </div>
+              </div>
+              <div class="col outline outline-warning">
+                <h4>Add</h4>
+                <div class="card-columns standby-card-container">
+
+                </div>
+                
+              </div>
+            </div>
+        <div>
+        
+        <!--contestAI button-->
+        <div class="flex-row d-flex align-items-end">
+            
+            <a href="contest.html">
+                <button type="button" class="btn btn-outline-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                      </svg>
+                    Back
+                </button>
+            </a>
+
+            <a href="info.html">
+                <button type="button" class="btn btn-outline-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"></path>
+                    </svg>
+                    AI info
+                </button>
+            </a>
+
+
+        </div>
+    </div>
+    
+    
+    
+    <script src="js/jquery1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/report.js"></script>
+
+
+</body>
+</html>
+
+
+
